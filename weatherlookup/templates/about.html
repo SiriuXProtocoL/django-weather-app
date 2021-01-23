@@ -2,6 +2,69 @@
 
 {% block content %}
 
-    <h1>About page</h1>
+    
+{% if api %}
+
+{% if api == "Error" %}
+    An Error Occurred, Please try again later... 
+
+{% else %}
+<div class="card text-center">
+    <div class="card-header">
+        Results
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ api.0.ReportingArea }} Air Quality : {{ api.0.AQI }}</h5>
+        
+    {% if api.0.Category.Name == "Good" %}
+    <p>
+        (0 - 50): Enjoy your outdoor activities 
+    </p>
+
+    {% elif api.0.Category.Name == "Moderate" %}
+    <p>
+         (51 - 100): If you are unusually sensitive to particle pollution, consider reducing your activity level or shorten the amount of time you are active outdoors. 
+    </p>
+
+    {% elif api.0.Category.Name == "Unhealthy for Sensitive Groups" %}
+    <p>
+        (101 - 150): Members of sensitive groups may experience health effects. The general public is less likely to be affected.
+    </p>
+
+    {% elif api.0.Category.Name == "Unhealthy" %}
+    <p>
+         (151 - 200): Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects.
+    </p>
+
+    {% elif api.0.Category.Name == "Very Unhealthy" %}
+    <p>
+         (201 - 300): Health alert: The risk of health effects is increased for everyone.
+    </p>
+
+    {% elif api.0.Category.Name == "Hazardous" %}
+    <p>
+         (301 - 500): Health warning of emergency conditions: everyone is more likely to be affected.
+    </p>
+
+    {% endif %}
+
+      <a href="#" class="btn btn-primary good">{{ api.0.Category.Name }}</a>
+    </div>
+    <div class="card-footer text-muted">
+        Latitude : {{ api.0.Latitude}} Longitude : {{ api.0.Longitude }}
+    </div>
+</div>
+    The API Resopnse </br> </br> {{ api }} </br> </br>
+    The API Resopnse Filtered </br> </br> {{ api.0 }} </br> </br>
+    Air Quality : {{ api.0.AQI }} </br>
+    Area : {{ api.0.ReportingArea }} </br>
+    StateCode : {{ api.0.StateCode }} </br>
+    Latitude : {{ api.0.Latitude}} </br>
+    Longitude : {{ api.0.Longitude }} </br>
+    Category : {{ api.0.Category.Name }} </br>
+{% endif %}
+
+{% endif %}
+
 
 {% endblock %}

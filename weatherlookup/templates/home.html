@@ -2,6 +2,30 @@
 
 {% block content %}
 
-    <h1>Hello World</h1>
+
+{% if api %}
+
+    {% if api == "Error" %}
+        An Error Occurred, Please try again later... 
+
+    {% else %}
+    <div class="card text-center">
+        <div class="card-header">
+            Results
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ api.0.ReportingArea }} Air Quality : {{ api.0.AQI }}</h5>
+
+          <p>{{ category_description }}</p>
+
+            <a href="#" class="btn btn-primary {{ category_colour }}">{{ api.0.Category.Name }}</a>
+        </div>
+        <div class="card-footer text-muted">
+            Latitude : {{ api.0.Latitude}} Longitude : {{ api.0.Longitude }}
+        </div>
+    </div>
+    {% endif %}
+
+{% endif %}
 
 {% endblock %}
