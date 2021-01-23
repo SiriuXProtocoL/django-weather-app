@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+#/usr/bin/python3 /home/siriux/Documents/Project/Django/weather/manage.py runserver
+#sudo fuser -k 8000/tcp
+
 import os
 import sys
 
